@@ -201,7 +201,7 @@ public class AddressBook {
      * 9, 8, 7
      */
 
-    private static final ArrayList<Integer> VALID_PHONE_STARTERS = new ArrayList<>(List.of(7, 8, 9));
+    private static final ArrayList<Integer> VALID_PHONE_FIRST_DIGIT = new ArrayList<>(List.of(7, 8, 9));
 
     /*
      * NOTE : =============================================================
@@ -1068,7 +1068,7 @@ public class AddressBook {
     private static boolean isPersonPhoneValid(String phone) {
         return (ALL_PHONE_LENGTHS.contains(phone.length()))
                 && (phone.matches("\\d+"))
-                && (VALID_PHONE_STARTERS.contains(Character.getNumericValue(phone.charAt(0))));    // phone nonempty sequence of digits
+                && (VALID_PHONE_FIRST_DIGIT.contains(Character.getNumericValue(phone.charAt(0))));    // phone nonempty sequence of digits
         //TODO: implement a more permissive validation
     }
 
@@ -1079,7 +1079,7 @@ public class AddressBook {
      * @return whether arg is a valid person email
      */
     private static boolean isPersonEmailValid(String email) {
-        return email.matches("\\S+@\\S+\\.\\S+"); // email is [non-whitespace]@[non-whitespace].[non-whitespace]
+        return email.matches("\\S+@[A-Z0-9.-]+\\.\\S+"); // email is [non-whitespace]@[non-whitespace].[non-whitespace]
         //TODO: implement a more permissive validation
     }
 
