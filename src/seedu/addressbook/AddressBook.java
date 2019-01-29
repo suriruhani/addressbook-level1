@@ -189,12 +189,19 @@ public class AddressBook {
     private static String storageFilePath;
 
     /**
-     * Allowed phone number lengths
+     * Allowed phone number lengths:
      * 8: SINGAPORE
      * 10: INDIA
      */
 
     private static final ArrayList<Integer> ALL_PHONE_LENGTHS = new ArrayList<>(List.of(8, 10));
+
+    /**
+     * Valid phone number starters:
+     * 9, 8, 7
+     */
+
+    private static final ArrayList<Integer> VALID_PHONE_STARTERS = new ArrayList<>(List.of(7, 8, 9));
 
     /*
      * NOTE : =============================================================
@@ -1059,7 +1066,9 @@ public class AddressBook {
      * @param phone to be validated
      */
     private static boolean isPersonPhoneValid(String phone) {
-        return (ALL_PHONE_LENGTHS.contains(phone.length()))  && (phone.matches("\\d+"));    // phone nonempty sequence of digits
+        return (ALL_PHONE_LENGTHS.contains(phone.length()))
+                && (phone.matches("\\d+"))
+                && (VALID_PHONE_STARTERS.contains(Character.getNumericValue(phone.charAt(0))));    // phone nonempty sequence of digits
         //TODO: implement a more permissive validation
     }
 
