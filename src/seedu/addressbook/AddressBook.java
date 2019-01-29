@@ -14,14 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 /*
  * NOTE : =============================================================
@@ -195,6 +188,14 @@ public class AddressBook {
      */
     private static String storageFilePath;
 
+    /**
+     * Allowed phone number lengths
+     * 8: SINGAPORE
+     * 10: INDIA
+     */
+
+    private static final ArrayList<Integer> ALL_PHONE_LENGTHS = new ArrayList<>(List.of(8, 10));
+
     /*
      * NOTE : =============================================================
      * Notice how this method solves the whole problem at a very high level.
@@ -212,7 +213,7 @@ public class AddressBook {
         loadDataFromStorage();
         while (true) {
             String userCommand = getUserInput();
-            echoUserCommand(userCommand);
+            //echoUserCommand(userCommand);
             String feedback = executeCommand(userCommand);
             showResultToUser(feedback);
         }
@@ -1058,7 +1059,7 @@ public class AddressBook {
      * @param phone to be validated
      */
     private static boolean isPersonPhoneValid(String phone) {
-        return phone.matches("\\d+");    // phone nonempty sequence of digits
+        return (ALL_PHONE_LENGTHS.contains(phone.length()))  && (phone.matches("\\d+"));    // phone nonempty sequence of digits
         //TODO: implement a more permissive validation
     }
 
